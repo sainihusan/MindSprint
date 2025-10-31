@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard</title>
+  <style>
+    /* ==== GLOBAL RESET ==== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* ==== BACKGROUND ==== */
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      color: #fff;
+    }
+
+    /* ==== TITLE ==== */
+    h1 {
+      font-size: 2.3rem;
+      margin-bottom: 20px;
+      color: #f8d210;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+      letter-spacing: 1px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #00f5d4;
+      margin-bottom: 15px;
+    }
+
+    /* ==== LEADERBOARD CONTAINER ==== */
+    #leaderboard-container {
+      width: 100%;
+      max-width: 700px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ==== TABLE ==== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: none;
+    }
+
+    th, td {
+      padding: 14px;
+      text-align: center;
+    }
+
+    th {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #f8d210;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    tr {
+      background-color: rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    tr:hover {
+      background-color: rgba(248, 210, 16, 0.15);
+      transform: scale(1.01);
+    }
+
+    td {
+      color: #fff;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    td:first-child {
+      font-weight: 700;
+      color: #f8d210;
+    }
+
+    /* ==== NO SCORES MESSAGE ==== */
+    #leaderboard-container p {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #ddd;
+      margin-top: 20px;
+    }
+
+    /* ==== BUTTON ==== */
+    button {
+      margin-top: 30px;
+      background: #f8d210;
+      color: #111;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    button:hover {
+      background: #ffd60a;
+      transform: scale(1.05);
+    }
+
+    /* ==== RESPONSIVE TABLE ==== */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      table.responsive-table,
+      table.responsive-table thead,
+      table.responsive-table tbody,
+      table.responsive-table th,
+      table.responsive-table td,
+      table.responsive-table tr {
+        display: block;
+        width: 100%;
+      }
+
+      table.responsive-table thead {
+        display: none;
+      }
+
+      table.responsive-table tr {
+        margin-bottom: 15px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        padding: 12px 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      table.responsive-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 8px;
+        border: none;
+        font-size: 0.9rem;
+      }
+
+      table.responsive-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #00f5d4;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz Leaderboard</h1>
+  <div id="leaderboard-container"></div>
+  <button onClick="window.location.href='/'">Back to Quiz</button>
+
+  <script type="module" src="./leaderboard.js"></script>
+</body>
+</html>
