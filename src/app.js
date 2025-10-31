@@ -2,6 +2,7 @@ import { QUESTION_POOL } from "./questions.js";
 import { Quiz } from "./quiz.js";
 import { UI } from "./ui.js";
 import { Timer } from "./Timer.js";
+import { Leaderboard } from "./leaderboard.js";
 
 
 const ui = new UI();
@@ -151,6 +152,24 @@ function showFinalResult(prefix, playerName) {
     document.getElementById("result-actions").style.display = "block";
     homeBtn.style.display = "block";
 }
+// ====== LEADERBOARD HANDLING ======
+const leaderboard = new Leaderboard("leaderboard-content");
+
+const leaderboardBtn = document.getElementById("leaderboard-btn");
+const backBtn = document.getElementById("back-btn");
+
+leaderboardBtn.addEventListener("click", () => {
+  document.getElementById("setup-container").style.display = "none";
+  document.getElementById("quiz-container").style.display = "none";
+  document.getElementById("leaderboard-container").style.display = "block";
+  leaderboard.render();
+});
+
+backBtn.addEventListener("click", () => {
+  document.getElementById("leaderboard-container").style.display = "none";
+  document.getElementById("setup-container").style.display = "block";
+});
+
 // Keyboard shortcuts
 document.addEventListener("keydown", (e) => {
     if (!quiz) return;

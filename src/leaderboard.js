@@ -17,37 +17,21 @@ export class Leaderboard {
     }
 
     let html = `
-      <h2>Top 5 Players</h2>
-      <div class="table-wrapper">
-        <table class="responsive-table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Name</th>
-              <th>Score</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>`;
+      <h2>🏆 Top 5 Players</h2>
+      <table border="1" cellpadding="8" style="width:100%;border-collapse:collapse;">
+        <tr><th>Rank</th><th>Name</th><th>Score</th><th>Date</th></tr>`;
 
     topPlayers.forEach((player, i) => {
       html += `
         <tr>
-          <td data-label="Rank">${i + 1}</td>
-          <td data-label="Name">${player.name}</td>
-          <td data-label="Score">${player.score}</td>
-          <td data-label="Date">${player.date}</td>
+          <td>${i + 1}</td>
+          <td>${player.name}</td>
+          <td>${player.score}</td>
+          <td>${player.date}</td>
         </tr>`;
     });
 
-    html += `
-          </tbody>
-        </table>
-      </div>`;
-
+    html += `</table>`;
     this.container.innerHTML = html;
   }
 }
-
-const leaderboard = new Leaderboard("leaderboard-container");
-leaderboard.render();
