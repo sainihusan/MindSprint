@@ -1,7 +1,7 @@
 import { QUESTION_POOL } from "./questions.js";
 import { Quiz } from "./quiz.js";
 import { UI } from "./ui.js";
-import { Timer } from "./timer.js";
+import { Timer } from "./Timer.js";
 
 
 const ui = new UI();
