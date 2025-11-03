@@ -5,9 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MindSprint</title>
-</head>
-<style>
-    /* Reset and Base Styles */
+  <style>
+    /* ==== GLOBAL RESET ==== */
     * {
       box-sizing: border-box;
       font-family: "Poppins", sans-serif;
@@ -25,15 +24,16 @@
       padding: 20px;
     }
 
-    /* Containers */
+    /* ==== COMMON CONTAINERS ==== */
     #setup-container,
-    #quiz-container {
+    #quiz-container,
+    #leaderboard-container {
       background: rgba(255, 255, 255, 0.08);
       padding: 30px 40px;
       border-radius: 16px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
       width: 100%;
-      max-width: 400px;
+      max-width: 500px;
       text-align: center;
       transition: all 0.3s ease;
     }
@@ -137,54 +137,107 @@
       background: #ffcc00;
       color: #1a1a2e;
     }
+
+    /* ==== LEADERBOARD STYLES ==== */
     #leaderboard-container {
-  background: rgba(255, 255, 255, 0.08);
-  padding: 30px 40px;
-  border-radius: 16px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-}
+      display: none;
+      max-width: 600px;
+      overflow-x: auto;
+    }
 
-#leaderboard-container h2 {
-  color: #00ffff;
-  margin-bottom: 20px;
-}
+    #leaderboard-container h2 {
+      color: #00ffff;
+      margin-bottom: 20px;
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
 
-#leaderboard-container table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 15px;
-}
+    #leaderboard-container table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
 
-#leaderboard-container th,
-#leaderboard-container td {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 8px;
-  color: #fff;
-  font-size: 14px;
-}
+    #leaderboard-container th,
+    #leaderboard-container td {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 14px;
+      text-align: center;
+    }
 
-#leaderboard-container th {
-  background: rgba(255, 255, 255, 0.1);
-}
+    #leaderboard-container th {
+      background: rgba(255, 255, 255, 0.15);
+      font-weight: bold;
+    }
 
-#back-btn {
-  background: transparent;
-  border: 1px solid #ffcc00;
-  color: #ffcc00;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-}
+    #leaderboard-container tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.05);
+    }
 
-#back-btn:hover {
-  background: #ffcc00;
-  color: #1a1a2e;
-}
+    #leaderboard-container tr:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transition: background 0.3s;
+    }
 
+    #back-btn {
+      background: transparent;
+      border: 1px solid #ffcc00;
+      color: #ffcc00;
+      margin-top: 10px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #back-btn:hover {
+      background: #ffcc00;
+      color: #1a1a2e;
+    }
+
+    /* ==== RESPONSIVE TABLE ==== */
+    @media (max-width: 600px) {
+      #leaderboard-container table,
+      #leaderboard-container thead,
+      #leaderboard-container tbody,
+      #leaderboard-container th,
+      #leaderboard-container td,
+      #leaderboard-container tr {
+        display: block;
+        width: 100%;
+      }
+
+      #leaderboard-container thead {
+        display: none;
+      }
+
+      #leaderboard-container tr {
+        margin-bottom: 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      #leaderboard-container td {
+        border: none;
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 10px;
+        text-align: left;
+        font-size: 13px;
+      }
+
+      #leaderboard-container td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #ffcc00;
+      }
+    }
 
     @media (max-width: 500px) {
       #setup-container,
@@ -197,8 +250,10 @@
       }
     }
   </style>
+</head>
 
 <body>
+  <!-- ==== QUIZ SETUP ==== -->
   <div id="setup-container">
     <h2>Start Quiz</h2>
     <label>Your Name:</label>
@@ -226,7 +281,7 @@
     <button id="leaderboard-btn">View Leaderboard 🏆</button>
   </div>
 
-  <!-- Quiz Container -->
+  <!-- ==== QUIZ CONTAINER ==== -->
   <div id="quiz-container" style="display:none;">
     <p id="timer"></p>
     <h2 id="question"></h2>
@@ -239,16 +294,17 @@
 
     <div id="result-actions" style="display:none;">
       <label style="font-weight:bold;">Want to play more? Click here 👇</label>
-      <button id="home-btn"onclick="window.location.href='/'">Play Again</button>
+      <button id="home-btn" onclick="window.location.href='/'">Play Again</button>
     </div>
   </div>
 
-  <!-- Leaderboard Container -->
-  <div id="leaderboard-container" style="display:none;">
+  <!-- ==== LEADERBOARD CONTAINER ==== -->
+  <div id="leaderboard-container">
     <div id="leaderboard-content"></div>
     <button id="back-btn">⬅ Back</button>
   </div>
 
+  <!-- ==== JS IMPORT ==== -->
   <script type="module" src="./src/app.js"></script>
 </body>
 
